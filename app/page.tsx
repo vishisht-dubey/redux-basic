@@ -1,24 +1,24 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
 import { increment, decrement, currentCount } from "@/store/slice/counterSlice";
-import { User } from "../store/slice/formSlice";
 import {
   currentFormData,
   updateFirstName,
   updateLastName,
 } from "@/store/slice/formSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
-
+import { useFetchAllProductsQuery,useFetchParticularProductQuery } from "@/fetchApi/counterApi";
+// import { isGeneratorFunction } from "util/types";
 // const data = {};
 
 export default function Home() {
-  const value = useAppSelector<number>((state) => {
-    return state.counter.value;
-  });
+  const value = useAppSelector(currentCount);
   const dispatch = useAppDispatch();
-  const form = useAppSelector<User>((state) => {
-    return state.form;
-  });
+  const form = useAppSelector(currentFormData);
+  // const { data, isError } = useFetchParticularProductQuery(3);
+  // console.log(isError);
+  // console.log(data);
+  const x = useFetchAllProductsQuery();
+  console.log(x)
   return (
     <main>
       <div>Hello World</div>

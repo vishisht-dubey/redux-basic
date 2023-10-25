@@ -29,5 +29,5 @@ export const counterSlice = createSlice({
 
 export const { increment, decrement, incrementByAmount, decrementByAmount } =
   counterSlice.actions;
-export const currentCount = (state: RootState) => state.counter.value;
+export const currentCount = (state: RootState) => state.persistData.counter.value;
 export default counterSlice.reducer;

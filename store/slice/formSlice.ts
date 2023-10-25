@@ -36,5 +36,5 @@ export const formSlice = createSlice({
 });
 
 export const { updateFirstName, updateLastName } = formSlice.actions; //This means that we have two actions in formSlice. One is updateFirstName and other is updateSecondName which updates second name 
-export const currentFormData = (state: RootState) => state.form;
+export const currentFormData = (state: RootState) => state.persistData.form;
 export default formSlice.reducer;

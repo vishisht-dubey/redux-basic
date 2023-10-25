@@ -5,6 +5,7 @@ import formReducer from "./slice/formSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import { combineReducers } from "@reduxjs/toolkit";
 import AsyncStorage from "redux-persist/lib/storage";
+import { counterRTKApi } from "@/fetchApi/counterApi";
 const persistConfig = {
   key: "redux-basic",
   storage: AsyncStorage,
@@ -20,7 +21,12 @@ const rootReducer = combineReducers({
 const persistData = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: persistData,
+  reducer: {
+    persistData,
+    [counterRTKApi.reducerPath]: counterRTKApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(counterRTKApi.middleware),
 });
 // export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
