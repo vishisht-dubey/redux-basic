@@ -1,21 +1,24 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { increment, decrement, currentCount } from "@/store/slice/counterSlice";
-import { change, currentName } from "../store/slice/counterName";
+import { User } from "../store/slice/formSlice";
 import {
   currentFormData,
   updateFirstName,
   updateLastName,
 } from "@/store/slice/formSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 
-const data = {};
+// const data = {};
 
 export default function Home() {
-  const count = useSelector(currentCount);
-  const current = useSelector(currentName);
-  const formData = useSelector(currentFormData);
-  const dispatch = useDispatch();
-  console.log(formData);
+  const value = useAppSelector<number>((state) => {
+    return state.counter.value;
+  });
+  const dispatch = useAppDispatch();
+  const form = useAppSelector<User>((state) => {
+    return state.form;
+  });
   return (
     <main>
       <div>Hello World</div>
@@ -28,7 +31,7 @@ export default function Home() {
           >
             Increment
           </button>
-          <span>{count}</span>
+          <span>{value}</span>
           <button
             aria-label="Decrement value"
             onClick={() => dispatch(decrement())}
@@ -38,7 +41,7 @@ export default function Home() {
         </div>
         <input
           type="text"
-          placeholder={formData.firstName}
+          placeholder={form.firstName}
           onChange={(event) => {
             dispatch(updateFirstName(event.target.value));
           }}
@@ -46,13 +49,13 @@ export default function Home() {
         <br />
         <input
           type="text"
-          placeholder={formData.lastName}
+          placeholder={form.lastName}
           onChange={(event) => {
             dispatch(updateLastName(event.target.value));
           }}
         />
         <span>
-          {formData.firstName} {formData.lastName}
+          {form.firstName} {form.lastName}
         </span>
       </div>
     </main>

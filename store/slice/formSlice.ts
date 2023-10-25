@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { PayloadAction } from "@reduxjs/toolkit";
 
-interface User {
+export interface User {
   firstName: string;
   lastName: string;
 }
